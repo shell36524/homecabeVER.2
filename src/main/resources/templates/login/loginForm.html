@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/head">
+
+<head th:replace="fragment/head.html::fragment-head"></head>
+<th:block layout:fragment="page_css">
+  <link rel="stylesheet" href="" th:href="@{/css/login/loginForm.css}">
+</th:block>
+<th:block layout:fragment="page_js">
+    <script defer th:src="@{/js/login/login.js}"></script>
+  <!--외부로그인API js-->
+  <script defer src="" th:src="@{/js/login/apiLogin.js}"></script>
+  <!--카카오로그인API-->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script>Kakao.init("13985b7a92d3ad25544564af1540eed1");</script>
+  <!--네이버로그인API-->
+  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+</th:block>
+<body>
+<header th:replace="fragment/menu.html::fragment-global"></header>
+<!--아이콘/검색창-->
+<div th:replace="fragment/uppermost.html::beforeLoginUpm"></div>
+<!-- 글로벌 오류 case1) form태그 밖에 있을 때 -->
+<ul th:if="${#fields.hasErrors('${loginForm}')}">
+  <li th:errors="${loginForm}" th:errorclass="globalError">글로벌 오류</li>
+</ul>
+<!-- 로그인 -->
+<form action="" th:action method="post" th:object="${loginForm}">
+  <section>
+    <!-- 윗부분 여백(margin-top과 별개) -->
+    <div class="margin-top"></div>
+    <article>
+      <!-- 로그인 상단 -->
+      <div class="login-title">HOME CA:BE LOGIN</div>
+      <div class="login-body">
+        <!-- 로그인 왼쪽 영역 -->
+        <div class="login-body1">
+          <!-- 아이디, 비밀번호 입력 -->
+          <div class="id-class">
+            <input type="text" name="id" th:field="*{id}" placeholder=" 아이디" class="id-textbox" th:errorclass="fieldError">
+            <div class="errmsg"></div>
+          </div>
+          <div class="pw-class">
+            <input type="password" name="pw" th:field="*{pw}" placeholder=" 비밀번호" class="pw-textbox" th:errorclass="fieldError">
+            <div class="errmsg"></div>
+          </div>
+          <!-- 로그인 버튼 -->
+          <!--        <button class="login-button" onclick="login()" id="loginBtn" type="submit" >로그인</button>-->
+          <button class="login-button" id="loginBtn" type="submit" >로그인</button>
+          <!-- 아이디저장, 자동로그인 -->
+          <div class="login-checkbox">
+            <div class="check1">
+              <input type="checkbox" id="tag1" name="tag1">
+              <label for=tag1>아이디 저장</label>
+            </div>
+            <div class="check2">
+              <input type="checkbox" id="tag2" name="tag2">
+              <label for=tag2><span class="autoLogin">자동로그인</span></label>
+            </div>
+          </div>
+        </div>
+        <!-- 영역 구분 선 -->
+        <div class="line-border"></div>
+        <!-- 로그인 오른쪽 영역 -->
+        <div class="login-body2">
+          <!-- SNS 외부 API -->
+          <div class="login-sns">
+            <a id="naverIdLogin_loginButton" href="javascript:void(0)"><img class="login-naver"
+                                                                            src="https://nuriss.kr/data/editor/1811/thumb-f25dcaecf0e201873d1d781c022795e4_1542973599_017_835x181.png"></a>
+            <a href="/login/kakaoLogin"><img class="login-kakao"
+                                             src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png"></a>
+            <!--카카오로그인API
+            <form id="form-kakao-login" method="post" action="kakao-login">
+              <input type="hidden" name="name"/>-->
+            <!-- <a href="#"><img class="login-facebook"
+                src="https://www.junohair.com/static_resources/images/myjuno/facebook_login.png"></a> -->
+          </div>
+        </div>
+      </div>
+      <!-- 로그인 하단 -->
+      <div class="login-bottom">
+        <div class="login-text">
+          <div><a href="#" th:href="@{/member/add}">회원가입&nbsp;</a></div>
+          <div class="login-text_br">|</div>
+          <div><a href="#" th:href="@{/findTelID}">&nbsp;아이디찾기&nbsp;</a></div>
+          <div class="login-text_br">|</div>
+          <div><a href="#" th:href="@{/findTelPW}">&nbsp;비밀번호찾기</a></div>
+        </div>
+      </div>
+    </article>
+  </section>
+</form>
+
+<!-- 최하단 -->
+<footer th:replace="fragment/footer.html::fragment-footer"></footer>
+
+</body>
+</html>

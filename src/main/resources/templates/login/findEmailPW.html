@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/head">
+
+<head th:replace="fragment/head.html::fragment-head"></head>
+<th:block layout:fragment="page_css">
+  <link rel="stylesheet" href="" th:href="@{/css/login/findEmailPW.css}">
+</th:block>
+<th:block layout:fragment="page_js">
+  <script defer th:src="@{/js/login/findByEmail.js}"></script>
+</th:block>
+<body>
+<header th:replace="fragment/menu.html::fragment-global"></header>
+<!--아이콘/검색창-->
+<div th:replace="fragment/uppermost.html::beforeLoginUpm"></div>
+<!-- 비밀번호 찾기 시작-->
+<!-- 타이틀 내용 -->
+<form action="" th:action="@{/login/findEmailID}">
+
+
+<article>
+  <div class="pwFind-top">
+    <span class="text1">HOME CA:BE 비밀번호 찾기</span>
+  </div>
+  <!-- 항목 선택 -->
+  <div class="findPW">
+    <ul>
+      <!-- 휴대폰으로 찾기 선택 -->
+      <li class="findPW_select">
+        <input type="radio"  name="findPW_type1" id="findPW_type_1" onclick="div_show('0');" >
+        <label for="findPW_type_1"><span class="text2">&nbsp;휴대폰으로 찾기</span></label>
+      </li>
+      <!-- 이메일로 찾기 선택 -->
+      <li class="findPW_select">
+        <input type="radio" checked name="findPW_type1" id="findPW_type_2" onclick="div_show('1');" >
+        <label for="findPW_type_2"><span class="text3">&nbsp;이메일로 찾기</span></label>
+      </li>
+    </ul>
+  </div>
+  <!-- 선택 항목별 내용 -->
+  <!-- 휴대폰으로 찾기 내용 -->
+  <div id="type1" style="display:block">
+    <ul class="pwFind-phoneText">
+      <li>
+        <input type="text" class="text-name" placeholder=" 아이디">
+      </li>
+      <li>
+        <input type="text" class="textInfo" placeholder="  - 없이 입력">
+      </li>
+      <!-- 선택1 버튼 -->
+      <button type="submit" class="findPW-button">확인</button>
+    </ul>
+  </div>
+  <!-- 이메일로 찾기 내용 -->
+  <div id="type2" style="display:none">
+    <ul class="pwFind-emailText">
+      <li>
+        <input type="text" class="text-name" placeholder=" 아이디">
+      </li>
+      <li>
+        <input type="text" class="textInfo" placeholder=" 이메일">
+      </li>
+      <!-- 선택2 버튼 -->
+      <button type="submit" class="findPW-button">확인</button>
+    </ul>
+  </div>
+  </div>
+</article>
+</form>
+<!-- 하단 -->
+<div class="head_blank">
+  <div class="order">
+    <div class="orderTop">
+      <div class="big"><a href="#" th:href="@{/findTelID}">아이디 찾기&nbsp;</a></div>
+      <div class="big" id="big">|</div>
+      <div class="big"><a href="/" th:href="@{/}">홈으로 돌아가기</a></div>
+    </div>
+  </div>
+</div>
+<!-- 최하단 -->
+<footer th:replace="fragment/footer.html::fragment-footer"></footer>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/head">
+
+<head th:replace="fragment/head.html::fragment-head"></head>
+<th:block layout:fragment="page_css">
+    <link rel="stylesheet" href="" th:href="@{/css/board/boardUpload.css}">
+</th:block>
+<th:block layout:fragment="page_js">
+    <script defer th:src="@{/js/board/boardUpload.js}"></script>
+    <script defer th:src="@{/js/common/ckeditor.js}"></script>
+    <script defer th:src="@{/js/common/ko.js}"></script>
+</th:block>
+<body>
+<header th:replace="fragment/menu.html::fragment-global"></header>
+<!--아이콘/검색창-->
+<div th:replace="fragment/uppermost.html::beforeLoginUpm"></div>
+<!-- 메인 시작 -->
+<main th:data-cate-num="${category}">
+    <section>
+        <form action="" method="post" th:object="${addForm}" enctype="multipart/form-data">
+            <div class="sectionINsection">
+                <!-- HOME CA:BE 글쓰기 와 등록 BOX -->
+                <div class="section_header">
+                    <p>HOME CA:BE 글쓰기</p>
+                    <div class="button-wrap">
+                        <button id="main">목록</button>
+                        <button id="upLoad">등록</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="임시">
+                    <!-- 게시판선택 -->
+                    <select name="boardCho" id="boardCho" th:field="*{cateNum}">
+                        <option value="11">제과</option>
+                        <option value="12">제빵</option>
+                        <option value="13">음료</option>
+                        <option value="14">노오븐 베이킹</option>
+                        <option value="21">발렌타인 데이</option>
+                        <option value="22">할로윈</option>
+                        <option value="23">빼빼로 데이</option>
+                        <option value="24">크리스마스</option>
+                        <option value="31">구도 / 각도</option>
+                        <option value="32">보정</option>
+                        <option value="51">Q&A</option>
+                        <option value="52">자유게시판</option>
+                    </select>
+                    <!-- 레시피 출처 선택 -->
+                    <div class="resource">
+                        <select name="resource" id="resource" th:field="*{fromRecipe}">
+                            <option value="1">나만의 레시피</option>
+                            <option value="2">퍼온 레시피</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- 게시물 제목 -->
+                <div class="boardTitle">
+                    <input type="text" id="inputTitle" placeholder="제목" style="height: 40px;" th:field="*{boardTitle}">
+                    <!--            데이터 추가용 입력필드-->
+                    <input class="bigMan" type="text" name="" placeholder="멤버번호" th:field="*{memberNum}">
+                    <input class="bigMan" type="text" name="" placeholder="멤버닉네임" th:field="*{nickname}">
+                </div>
+                <!-- 본문내용 입력창 -->
+                <textarea name="content" id="boardContent" th:field="*{boardContent}" cols="30" rows="10" placeholder="내용"></textarea>
+            </div>
+            <div>
+                첨부파일
+            </div>
+            <div>
+                <!-- 파일 입력창 -->
+                <input type="file" name="" id="" th:field="*{files}" multiple>
+            </div>
+            </div>
+        </form>
+    </section>
+</main>
+<!-- 최하단 -->
+<footer th:replace="fragment/footer.html::fragment-footer"></footer>
+</body>
+</html>
